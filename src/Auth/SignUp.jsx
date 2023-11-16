@@ -3,26 +3,14 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../Hooks/useAuth";
 import toast from "react-hot-toast";
+import useAxiosPublic from "../Hooks/useAxiosPublic";
+import SocialLogin from "./SocialLogin";
 
 const SignUp = () => {
   const { userCreate, userUpDateProfile } = useAuth();
   const navigate = useNavigate();
 
-  // const handleSignUp = (e) => {
-  //   e.preventDefault();
-  //   const form = e.target;
-  //   const email = form.email.value;
-  //   const password = form.password.value;
-  //   userCreate(email, password)
-  //     .then((res) => {
-  //       console.log(res);
-  //       toast.success("Account Created Success");
-  //       navigate("/");
-  //     })
-  //     .then((err) => {
-  //       console.log(err.message);
-  //     });
-  // };
+  const publicAxios = useAxiosPublic();
 
   const {
     register,
@@ -32,14 +20,25 @@ const SignUp = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
     userCreate(data.email, data.password)
-      .then((result) => {
-        console.log(result.user);
+      .then(() => {
         userUpDateProfile(data.displayName, data.photoURL);
-        toast.success("User created successfully");
-        reset();
-        navigate("/");
+
+        const userInfo = { name: data.name, email: data.email };
+
+        /* User Data Post To mongoDB  */
+        publicAxios
+          .post("/users", userInfo)
+          .then((res) => {
+            if (res.data.insertedId) {
+              toast.success("User created successfully");
+              reset();
+              navigate("/");
+            }
+          })
+          .catch((err) => {
+            toast.error(err.message);
+          });
       })
       .catch((error) => {
         console.log(error);
@@ -129,6 +128,10 @@ const SignUp = () => {
               <Link to="/login" className="text-center font-bold text-red-400 underline">
                 Login Now
               </Link>
+            </div>
+            <div className="divider divider-neutral">or</div>
+            <div className="flex justify-center">
+              <SocialLogin />
             </div>
           </form>
         </div>

@@ -1,12 +1,13 @@
 /* eslint-disable react/no-unescaped-entities */
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import toast from "react-hot-toast";
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from "react-simple-captcha";
 import useAuth from "../Hooks/useAuth";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import SocialLogin from "./SocialLogin";
 
 const Login = () => {
-  const [isDisabled, setIsDisabled] = useState(true);
+  // const [isDisabled, setIsDisabled] = useState(true);
   const captchaRef = useRef();
 
   const navigate = useNavigate();
@@ -38,10 +39,10 @@ const Login = () => {
   const handleValidCaptcha = () => {
     const user_captcha_value = captchaRef.current.value;
     if (validateCaptcha(user_captcha_value) == true) {
-      setIsDisabled(false);
+      // setIsDisabled(false);
       toast("Captcha Matched");
     } else {
-      setIsDisabled(true);
+      // setIsDisabled(true);
       toast("Captcha Does Not Match");
     }
   };
@@ -97,7 +98,7 @@ const Login = () => {
                 ref={captchaRef}
                 placeholder="Type Your Captcha"
                 className="input input-bordered"
-                required
+                // required
               />
               <button
                 onClick={handleValidCaptcha}
@@ -108,7 +109,7 @@ const Login = () => {
             </div>
             <div className="form-control mt-6">
               <input
-                disabled={isDisabled}
+                // disabled={isDisabled}
                 type="submit"
                 value="Login"
                 className="btn btn-primary"
@@ -119,6 +120,10 @@ const Login = () => {
                   Create an Account
                 </Link>
               </div>
+              <div className="divider divider-neutral">or</div>
+              <div className="flex justify-center">
+              <SocialLogin />
+            </div>
             </div>
           </form>
         </div>
