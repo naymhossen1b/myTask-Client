@@ -3,6 +3,7 @@ import useAuth from "../Hooks/useAuth";
 
 const PrivateRoute = ({ children }) => {
   const { user, loading } = useAuth();
+  // console.log(loading);
 
   const location = useLocation();
 
@@ -10,10 +11,10 @@ const PrivateRoute = ({ children }) => {
     return <progress className="progress w-full"></progress>;
   }
 
-  if (user?.email) {
-    return children;
-  }
-  return <Navigate to="/login" state={{from: location}} replace></Navigate>
+  return user ? (
+    <div>{children}</div>
+  ) : (
+    <Navigate to={"/login"} state={{ from: location }} replace />
+  );
 };
-
 export default PrivateRoute;

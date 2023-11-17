@@ -1,6 +1,4 @@
-import {
-    createBrowserRouter,
-  } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import MainLayout from "../Layout/MainLayout";
 import Home from "../Pages/Home/Home";
 import Menus from "../Pages/Menu/Menus";
@@ -20,87 +18,86 @@ import AddItems from "../Pages/Admin/AddItems";
 import ManageBookings from "../Pages/Admin/ManageBookings";
 import ManageItems from "../Pages/Admin/ManageItems";
 
-  export const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <MainLayout />,
-      children: [
-        {
-            path: '/',
-            element: <Home />
-        },
-        {
-          path: '/menus',
-          element: <Menus />
-        },
-        {
-          path: '/order/:category',
-          element: <Order />
-        },
-        {
-          path: '/login',
-          element: <Login />
-        },
-        {
-          path: '/signUp',
-          element: <SignUp />
-        }
-      ]
-    },
-    {
-      path: 'dashboard',
-      element: <Dashboard />,
-      children: [
+export const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <MainLayout />,
+    children: [
+      {
+        path: "/",
+        element: <Home />,
+      },
+      {
+        path: "/menus",
+        element: <Menus />,
+      },
+      {
+        path: "/order/:category",
+        element: <Order />,
+      },
+      {
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/signUp",
+        element: <SignUp />,
+      },
+    ],
+  },
+  {
+    path: "dashboard",
+    element: <Dashboard />,
+    children: [
+      ///// Users Routes \\\\\
 
-        ///// Users Routes \\\\\
+      {
+        path: "cart",
+        element: <Cart />,
+      },
+      {
+        path: "userHome",
+        element: <UserHome />,
+      },
+      {
+        path: "reservation",
+        element: <Reservation />,
+      },
+      {
+        path: "paymentHistory",
+        element: <PaymentHistory />,
+      },
+      {
+        path: "addReview",
+        element: <AddReview />,
+      },
+      {
+        path: "myBooking",
+        element: <MyBookings />,
+      },
 
-        {
-          path: 'cart',
-          element: <Cart />
-        },
-        {
-          path: 'userHome',
-          element: <UserHome />
-        },
-        {
-          path: 'reservation',
-          element: <Reservation />
-        },
-        {
-          path: 'paymentHistory',
-          element: <PaymentHistory />
-        },
-        {
-          path: 'addReview',
-          element: <AddReview />
-        },
-        {
-          path: 'myBooking',
-          element: <MyBookings />
-        },
+      ///// Admin Routes \\\\\
 
-        ///// Admin Routes \\\\\
-
-        {
-          path: 'allUsers',
-          element: <AllUsers />
-        },
-        {
-          path: 'adminHome',
-          element: <AdminHome />
-        },
-        {
-          path: 'addItems',
-          element: <AddItems />
-        },
-        {
-          path: 'manageBookings',
-          element: <ManageBookings />
-        },
-        {
-          path: 'manageItems',
-          element: <ManageItems />
-        },
-      ]
-    }
-  ]);
+      {
+        path: "allUsers",
+        element: <AllUsers />,
+      },
+      {
+        path: "adminHome",
+        element: <AdminHome />,
+      },
+      {
+        path: "addItems",
+        element: <AddItems />,
+      },
+      {
+        path: "manageBookings",
+        element: <ManageBookings />,
+      },
+      {
+        path: "manageItems",
+        element: <ManageItems />,
+      },
+    ],
+  },
+]);

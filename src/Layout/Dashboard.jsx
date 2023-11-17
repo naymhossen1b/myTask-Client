@@ -21,10 +21,9 @@ const Dashboard = () => {
   const [cart] = useCart();
 
   const [isAdmin] = useAdmin();
-  // const isAdmin = true;
 
   return (
-    <div className="w-11/12 mx-auto bg-orange-50">
+    <div className="w-11/12 mx-auto">
       <div className="flex gap-5">
         <div className="w-64 min-h-screen bg-orange-300">
           <ul className="menu font-bold uppercase">
