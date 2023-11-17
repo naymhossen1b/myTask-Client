@@ -34,7 +34,7 @@ const AddItems = () => {
         toast.success(`${data.name} Successfully Added`);
         reset();
       }
-      toast.error(`${data.name} Not Added!`)
+      // toast.error(`${data.name} Not Added!`)
     }
   };
 
