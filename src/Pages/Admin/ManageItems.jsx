@@ -4,6 +4,7 @@ import UseMenu from "../../Hooks/UseMenu";
 import Swal from "sweetalert2";
 import useAxios from "../../Hooks/useAxios";
 import toast, { Toaster } from "react-hot-toast";
+import { Link } from "react-router-dom";
 
 const ManageItems = () => {
   const [menus, refetch] = UseMenu();
@@ -63,9 +64,11 @@ const ManageItems = () => {
                   </td>
                   <td>{menu.name}</td>
                   <td>${menu.price}</td>
-                  <td className="text-2xl font-bold text-green-500 hover:cursor-pointer">
-                    <FaEdit />
-                  </td>
+                  <Link to={`/dashboard/updateItems/${menu._id}`}>
+                    <td className="text-2xl font-bold text-green-500 hover:cursor-pointer">
+                      <FaEdit />
+                    </td>
+                  </Link>
                   <th>
                     <button
                       onClick={() => handleDelete(menu)}

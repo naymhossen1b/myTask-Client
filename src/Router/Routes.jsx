@@ -17,6 +17,7 @@ import AdminHome from "../Pages/Admin/AdminHome";
 import AddItems from "../Pages/Admin/AddItems";
 import ManageBookings from "../Pages/Admin/ManageBookings";
 import ManageItems from "../Pages/Admin/ManageItems";
+import UpdateItems from "../Pages/Admin/UpdateItems";
 
 export const router = createBrowserRouter([
   {
@@ -98,6 +99,11 @@ export const router = createBrowserRouter([
         path: "manageItems",
         element: <ManageItems />,
       },
+      {
+        path: 'updateItems/:id',
+        element: <UpdateItems />,
+        loader: ({params}) => fetch(`http://localhost:3000/api/menus/${params.id}`)
+      }
     ],
   },
 ]);
