@@ -9,7 +9,6 @@ import Dashboard from "../Layout/Dashboard";
 import Cart from "../Pages/Dashboard/Cart";
 import UserHome from "../Pages/Dashboard/UserHome";
 import Reservation from "../Pages/Dashboard/Reservation";
-import PaymentHistory from "../Pages/Dashboard/PaymentHistory";
 import AddReview from "../Pages/Dashboard/AddReview";
 import MyBookings from "../Pages/Dashboard/MyBookings";
 import AllUsers from "../Pages/Admin/AllUsers";
@@ -18,6 +17,8 @@ import AddItems from "../Pages/Admin/AddItems";
 import ManageBookings from "../Pages/Admin/ManageBookings";
 import ManageItems from "../Pages/Admin/ManageItems";
 import UpdateItems from "../Pages/Admin/UpdateItems";
+import MakePayment from "../Pages/Dashboard/Payment/MakePayment";
+import PaymentHistory from "../Pages/Dashboard/Payment/PaymentsHistory/PaymentHistory";
 
 export const router = createBrowserRouter([
   {
@@ -65,16 +66,20 @@ export const router = createBrowserRouter([
         element: <Reservation />,
       },
       {
-        path: "paymentHistory",
-        element: <PaymentHistory />,
-      },
-      {
         path: "addReview",
         element: <AddReview />,
       },
       {
         path: "myBooking",
         element: <MyBookings />,
+      },
+      {
+        path: "makePayment",
+        element: <MakePayment />,
+      },
+      {
+        path: "paymentHistory",
+        element: <PaymentHistory />,
       },
 
       ///// Admin Routes \\\\\
@@ -100,10 +105,10 @@ export const router = createBrowserRouter([
         element: <ManageItems />,
       },
       {
-        path: 'updateItems/:id',
+        path: "updateItems/:id",
         element: <UpdateItems />,
-        loader: ({params}) => fetch(`http://localhost:3000/api/menus/${params.id}`)
-      }
+        loader: ({ params }) => fetch(`http://localhost:3000/api/menus/${params.id}`),
+      },
     ],
   },
 ]);
