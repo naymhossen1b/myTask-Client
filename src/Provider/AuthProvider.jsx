@@ -36,7 +36,7 @@ const AuthProvider = ({ children }) => {
   };
 
   const logOut = () => {
-    // setLoading(true);
+    setLoading(true);
     return signOut(auth);
   };
 
@@ -52,9 +52,8 @@ const AuthProvider = ({ children }) => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
         setUser(currentUser);
-        console.log(currentUser);
         const userInfo = { email: currentUser?.email };
-        setLoading(false);
+        // setLoading(false);
         publicAxios.post("/jwt", userInfo).then((res) => {
           if (res?.data?.token) {
             // console.log(res.data);

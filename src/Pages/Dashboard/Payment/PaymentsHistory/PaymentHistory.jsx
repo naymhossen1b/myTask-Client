@@ -14,7 +14,7 @@ const PaymentHistory = () => {
       return res.data;
     },
   });
-  console.log(payments);
+  // console.log(payments);
 
   return (
     <>
@@ -23,7 +23,7 @@ const PaymentHistory = () => {
       </div>
       <div className="bg-white border border-orange-400 rounded-md">
         <div className="flex uppercase items-center justify-between mb-5 text-xl font-bold border p-2 rounded-t border-orange-400">
-          <h1>Total Payments: {payments.length}</h1>
+          <h1>Total Payments: {payments?.length}</h1>
         </div>
         <div className="overflow-x-auto">
           <table className="table py-8">
@@ -39,7 +39,7 @@ const PaymentHistory = () => {
               </tr>
             </thead>
             <tbody>
-              {payments.map((item, index) => (
+              {payments?.map((item, index) => (
                 <tr key={item._id}>
                   <th>{index + 1}</th>
                   <td>{item.email}</td>

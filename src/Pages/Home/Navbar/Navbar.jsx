@@ -1,19 +1,18 @@
 import { Link } from "react-router-dom";
 import useAuth from "../../../Hooks/useAuth";
-import { BsFillCartCheckFill } from 'react-icons/bs';
+import { BsFillCartCheckFill } from "react-icons/bs";
 import useCart from "../../../Hooks/useCart";
+// import useAdmin from "../../../Hooks/useAdmin";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
-
+  // const [isAdmin] = useAdmin();
   const [cart] = useCart();
 
   const handleLogOut = () => {
-    logOut()
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((error) => console.log(error));
+    return logOut()
+      .then( res => console.log(res))
+      .catch( error => console.log(error))
   };
 
   const navOption = (
@@ -37,7 +36,7 @@ const Navbar = () => {
       </li>
       {user ? (
         <>
-          <button onClick={handleLogOut} className="btn font-bold text-xl border-b-4 btn-ghost">
+          <button onClick={() => handleLogOut()} className="btn font-bold text-xl border-b-4 btn-ghost">
             LogOut
           </button>
         </>
