@@ -11,10 +11,11 @@ const TaskForm = () => {
   const { register, handleSubmit } = useForm();
 
   const onSubmit = (data) => {
+    // console.log(data)
     const taskInfo = {
       title: data.title,
       descriptions: data.descriptions,
-      startDate: data.startDate,
+      startDate
     };
 
     SecureAxios.post("/tasks", taskInfo)
@@ -29,8 +30,8 @@ const TaskForm = () => {
   return (
     <div>
       <div>
-        <h2 className="text-4xl font-medium">Today</h2>
-        <div className="bg-white rounded-md p-2">
+        <h2 className="text-4xl font-medium py-2 uppercase underline">Today:</h2>
+        <div className="bg-white rounded-md px-3 py-6">
           <form onSubmit={handleSubmit(onSubmit)}>
             <div>
               <input
@@ -51,7 +52,7 @@ const TaskForm = () => {
                 placeholder="Descriptions"
               ></textarea>
             </div>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center mt-3 gap-3">
               <div className="border rounded-md p-1 bg-white">
                 <label>
                   <select className="" {...register("priority", { required: true })}>
@@ -67,7 +68,10 @@ const TaskForm = () => {
                 <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
               </div>
               <div>
-                <button type="submit" className="bg-orange-400 rounded-md text-white px-2 py-1">
+                <button
+                  type="submit"
+                  className="bg-orange-400 hover:bg-green-600 rounded-md text-white px-2 py-1"
+                >
                   Add Task
                 </button>
               </div>

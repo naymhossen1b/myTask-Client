@@ -2,11 +2,11 @@ import { Link } from "react-router-dom";
 
 const Banner = () => {
   return (
-    <div className="flex items-center">
-      <div className="w-1/2">
+    <div className="md:flex flex-grow items-center">
+      <div className="md:w-1/2">
         <img className="" src="/public/3900527.jpg" alt="" />
       </div>
-      <div className="w-1/2 space-y-5">
+      <div className="md:w-1/2 space-y-5">
         <h1 className="text-6xl font-bold text-center">
           Organize your work <br /> and life, finally.
         </h1>

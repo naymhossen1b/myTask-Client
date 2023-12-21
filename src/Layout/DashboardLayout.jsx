@@ -1,4 +1,7 @@
 import { NavLink, Outlet } from "react-router-dom";
+import { IoAddCircleOutline } from "react-icons/io5";
+import { MdOutlineMoveToInbox, MdCalendarToday } from "react-icons/md";
+import { FaCalendarCheck, FaHome } from "react-icons/fa";
 
 const DashboardLayout = () => {
   return (
@@ -6,13 +9,19 @@ const DashboardLayout = () => {
       <div className="w-64 min-h-screen bg-orange-300">
         <ul className="menu font-bold uppercase space-y-3 py-24">
           <li>
-            {/* <NavLink to="/dashboardLayout/dashboard">Dashboard</NavLink> */}
+            <NavLink to="/dashboardLayout/myTask"> <IoAddCircleOutline />Add Task</NavLink>
           </li>
           <li>
-            <NavLink to="/dashboardLayout/myTask">Task</NavLink>
+            <NavLink to="/dashboardLayout/inbox"><MdOutlineMoveToInbox />Inbox</NavLink>
           </li>
           <li>
-            <NavLink to="/">Home</NavLink>
+            <NavLink to="/dashboardLayout/today"><MdCalendarToday />Today</NavLink>
+          </li>
+          <li>
+            <NavLink to="/dashboardLayout/upComing"><FaCalendarCheck />Upcoming</NavLink>
+          </li>
+          <li>
+            <NavLink to="/"><FaHome />Home</NavLink>
           </li>
         </ul>
       </div>
