@@ -1,41 +1,87 @@
-import { DndProvider } from "react-dnd";
-import DraggableItem from "../Drag/DraggableItem";
-import DroppableContainer from "../Drag/DroppableContainer";
+import { DndProvider, useDrag, useDrop } from "react-dnd";
 import UseTasks from "../Hooks/UseTasks";
-import { HTML5Backend } from 'react-dnd-html5-backend';
+import { HTML5Backend } from "react-dnd-html5-backend";
+
+const TaskItem = ({ task, index, moveTask }) => {
+  const [{ isDragging }, drag] = useDrag({
+    type: "TASK", // Make sure to define the type property
+    item: { index },
+    collect: (monitor) => ({
+      isDragging: monitor.isDragging(),
+    }),
+  });
+
+  const [, drop] = useDrop({
+    accept: "TASK",
+    hover: (item) => {
+      if (item.index !== index) {
+        moveTask(item.index, index);
+        item.index = index;
+      }
+    },
+  });
+
+  return (
+    <div
+      ref={(node) => drag(drop(node))}
+      style={{ opacity: isDragging ? 0.5 : 1 }}
+      className="space-y-2 border-gray-400 border rounded-md p-2"
+    >
+      <h4 className="text-xl font-medium">{task?.title}</h4>
+      <p className="font-medium">{task?.descriptions}</p>
+      <div>
+        <p className="text-sm">
+          <span className="font-medium underline">Deadlines </span>: {task?.startDate}
+        </p>
+        <p className="text-green-500 uppercase">
+          <span className="underline font-medium text-neutral">Priority </span>
+          {task?.priority}
+        </p>
+      </div>
+    </div>
+  );
+};
 
 const AllTasks = () => {
-  const [tasks] = UseTasks();
+  const [tasks, setTasks] = UseTasks();
 
-  //   eventLogger = (e: MouseEvent, data: Object) => {
-  //     console.log('Event: ', e);
-  //     console.log('Data: ', data);
-  //   };
+  const moveTask = (fromIndex, toIndex) => {
+    const updatedTasks = [...tasks];
+    const [movedTask] = updatedTasks.splice(fromIndex, 1);
+    updatedTasks.splice(toIndex, 0, movedTask);
+    setTasks(updatedTasks);
+  };
 
   return (
     <div>
-      <section className="flex items-center justify-between px-3 py-5">
-        <div className="border-r-2 border-gray-500 ">
-          <h2 className="uppercase text-3xl font-medium">to-do</h2>
-          <div>
-          </div>
-        </div>
-        <div className="border-r-2 border-gray-500"></div>
-        <div>
-          <h2 className="uppercase text-3xl font-medium">to-do</h2>
-        </div>
-        <div>
-          <h2 className="uppercase text-3xl font-medium">to-do</h2>
-        </div>
-      </section>
       <DndProvider backend={HTML5Backend}>
-      <div className="flex justify-center mt-8">
-        <DraggableItem id="1" content="Item 1" />
-        <DraggableItem id="2" content="Item 2" />
-        <DraggableItem id="3" content="Item 3" />
-        <DroppableContainer />
-      </div>
-    </DndProvider>
+        <section className="flex justify-between py-5 border rounded-md px-3">
+          <div>
+            <h1 className="text-4xl font-medium">To-Do:</h1>
+            <div className="space-y-3">
+              {tasks?.map((task, index) => (
+                <TaskItem key={task._id} task={task} index={index} moveTask={moveTask} />
+              ))}
+            </div>
+          </div>
+          <div className="">
+            <h1 className="text-4xl font-medium">Ongoing:</h1>
+            <div className="space-y-3">
+              {tasks?.map((task, index) => (
+                <TaskItem key={task._id} task={task} index={index} moveTask={moveTask} />
+              ))}
+            </div>
+          </div>
+          <div>
+            <h1 className="text-4xl font-medium">Completed</h1>
+            <div className="space-y-3">
+              {tasks?.map((task, index) => (
+                <TaskItem key={task._id} task={task} index={index} moveTask={moveTask} />
+              ))}
+            </div>
+          </div>
+        </section>
+      </DndProvider>
     </div>
   );
 };

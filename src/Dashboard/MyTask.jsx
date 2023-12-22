@@ -14,6 +14,7 @@ const TaskForm = () => {
     // console.log(data)
     const taskInfo = {
       title: data.title,
+      priority: data.priority,
       descriptions: data.descriptions,
       startDate
     };

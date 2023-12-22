@@ -21,6 +21,9 @@ const DashboardLayout = () => {
             <NavLink to="/dashboardLayout/upComing"><FaCalendarCheck />Upcoming</NavLink>
           </li>
           <li>
+            <NavLink to="/dashboardLayout/task"><FaCalendarCheck />Task</NavLink>
+          </li>
+          <li>
             <NavLink to="/"><FaHome />Home</NavLink>
           </li>
         </ul>
