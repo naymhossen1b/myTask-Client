@@ -4,7 +4,7 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 
 const TaskItem = ({ task, index, moveTask }) => {
   const [{ isDragging }, drag] = useDrag({
-    type: "TASK", // Make sure to define the type property
+    type: "TASK",
     item: { index },
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
@@ -55,10 +55,10 @@ const AllTasks = () => {
   return (
     <div>
       <DndProvider backend={HTML5Backend}>
-        <section className="flex justify-between py-5 border rounded-md px-3">
+        <section className="md:flex grid grid-cols-1 justify-between py-5 border rounded-md px-3 gap-5">
           <div>
-            <h1 className="text-4xl font-medium">To-Do:</h1>
-            <div className="space-y-3">
+            <h1 className="text-4xl font-medium">To-Do - ({tasks?.length})</h1>
+            <div className="space-y-3 mt-3">
               {tasks?.map((task, index) => (
                 <TaskItem key={task._id} task={task} index={index} moveTask={moveTask} />
               ))}
@@ -66,7 +66,7 @@ const AllTasks = () => {
           </div>
           <div className="">
             <h1 className="text-4xl font-medium">Ongoing:</h1>
-            <div className="space-y-3">
+            <div className="space-y-3 mt-3">
               {tasks?.map((task, index) => (
                 <TaskItem key={task._id} task={task} index={index} moveTask={moveTask} />
               ))}
@@ -74,7 +74,7 @@ const AllTasks = () => {
           </div>
           <div>
             <h1 className="text-4xl font-medium">Completed</h1>
-            <div className="space-y-3">
+            <div className="space-y-3 mt-3">
               {tasks?.map((task, index) => (
                 <TaskItem key={task._id} task={task} index={index} moveTask={moveTask} />
               ))}

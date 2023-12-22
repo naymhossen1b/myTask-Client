@@ -6,7 +6,7 @@ import { FaCalendarCheck, FaHome } from "react-icons/fa";
 const DashboardLayout = () => {
   return (
     <div className="flex gap-5 bg-orange-50">
-      <div className="w-64 min-h-screen bg-orange-300">
+      <div className="md:w-64 min-h-screen bg-orange-300">
         <ul className="menu font-bold uppercase space-y-3 py-24">
           <li>
             <NavLink to="/dashboardLayout/myTask"> <IoAddCircleOutline />Add Task</NavLink>
@@ -28,7 +28,7 @@ const DashboardLayout = () => {
           </li>
         </ul>
       </div>
-      <div className="flex-1 py-16 px-8">
+      <div className="flex-1 py-16 md:px-8">
         <Outlet />
       </div>
     </div>
