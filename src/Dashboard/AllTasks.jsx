@@ -1,6 +1,9 @@
 import { DndProvider, useDrag, useDrop } from "react-dnd";
 import UseTasks from "../Hooks/UseTasks";
 import { HTML5Backend } from "react-dnd-html5-backend";
+import { ImSpinner9 } from "react-icons/im";
+import { TiTickOutline } from "react-icons/ti";
+import { LuListTodo } from "react-icons/lu";
 
 const TaskItem = ({ task, index, moveTask }) => {
   const [{ isDragging }, drag] = useDrag({
@@ -57,7 +60,7 @@ const AllTasks = () => {
       <DndProvider backend={HTML5Backend}>
         <section className="md:flex grid grid-cols-1 justify-between py-5 border rounded-md px-3 gap-5">
           <div>
-            <h1 className="text-4xl font-medium">To-Do - ({tasks?.length})</h1>
+            <h1 className="text-4xl font-medium flex items-center gap-2">To-Do - ({tasks?.length}) <LuListTodo className="text-orange-700" /></h1>
             <div className="space-y-3 mt-3">
               {tasks?.map((task, index) => (
                 <TaskItem key={task._id} task={task} index={index} moveTask={moveTask} />
@@ -65,7 +68,10 @@ const AllTasks = () => {
             </div>
           </div>
           <div className="">
-            <h1 className="text-4xl font-medium">Ongoing:</h1>
+            <h1 className="text-4xl font-medium flex items-center gap-2">
+              Ongoing
+              <ImSpinner9 className="animate-spin text-2xl text-green-400" />
+            </h1>
             <div className="space-y-3 mt-3">
               {tasks?.map((task, index) => (
                 <TaskItem key={task._id} task={task} index={index} moveTask={moveTask} />
@@ -73,7 +79,9 @@ const AllTasks = () => {
             </div>
           </div>
           <div>
-            <h1 className="text-4xl font-medium">Completed</h1>
+            <h1 className="text-4xl font-medium flex items-center gap-2">
+              Completed <TiTickOutline className="text-green-600" />
+            </h1>
             <div className="space-y-3 mt-3">
               {tasks?.map((task, index) => (
                 <TaskItem key={task._id} task={task} index={index} moveTask={moveTask} />

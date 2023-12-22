@@ -37,7 +37,27 @@ const Header = () => {
             <ul
               tabIndex={0}
               className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
-            ></ul>
+            >
+              <nav className="menu space-y-3">
+              <Link to="/">Home</Link>
+              <Link to="/feature">Feature</Link>
+              <Link to="/forTeam">For Team</Link>
+              <Link className="border-gray-600 md:border-r-2 md:pr-5" to="/pricing">Pricing</Link>
+              {user ? (
+                <>
+                  <button onClick={() => handleLogout()}
+                  className="bg-lime-500 rounded-full px-2 py-3"
+                  >
+                    <Link>Logout</Link>
+                  </button>
+                </>
+              ) : (
+                <>
+                  <Link to="/login">Login</Link>
+                </>
+              )}
+            </nav>
+            </ul>
           </div>
           <a className="font-bold text-xl">myTask</a>
         </div>

@@ -14,7 +14,7 @@ const Banner = () => {
           Become focused, organized, and calm with myTask. The world’s <br />
           #1 task manager and to-do list app.
         </p>
-        <div className="flex items-center justify-center">
+        <div className="flex items-center justify-center pb-4 md:pb-0">
           <Link to="dashboardLayout/myTask">
             <button className="bg-fuchsia-800 text-white text-xl font-bold border rounded-full px-4 py-2">
               Let’s Explore
