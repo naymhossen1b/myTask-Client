@@ -41,7 +41,7 @@ const Register = () => {
   };
 
   return (
-    <div className="px-96">
+    <div className="md:px-96 px-3">
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
           <h1 className="text-3xl text-center text-black font-bold py-5">myTask</h1>
@@ -49,7 +49,7 @@ const Register = () => {
             <div
               onClick={handleGoogle}
               role="button"
-              className="flex items-center gap-2 text-2xl font-bold justify-center py-8"
+              className="flex items-center gap-2 md:text-2xl font-bold justify-center py-8"
             >
               <FcGoogle /> Continue with Google
             </div>
