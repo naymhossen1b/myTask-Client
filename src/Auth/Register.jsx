@@ -2,10 +2,11 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import SecureAxios from "../Hooks/SecureAxios";
+import { FcGoogle } from "react-icons/fc";
 import UseAuth from "../Hooks/useAuth";
 
 const Register = () => {
-  const { createUser, updateUser } = UseAuth();
+  const { createUser, updateUser, googleLogin } = UseAuth();
   const navigate = useNavigate();
 
   const { register, handleSubmit, reset } = useForm();
@@ -33,12 +34,25 @@ const Register = () => {
       });
   };
 
+  const handleGoogle = async () => {
+    await googleLogin();
+    toast.success("Login success!");
+    navigate("/");
+  };
+
   return (
     <div className="px-96">
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
-          <h1 className="text-3xl text-center text-black font-bold py-5">JobTask</h1>
+          <h1 className="text-3xl text-center text-black font-bold py-5">myTask</h1>
           <section className="border rounded-md border-gray-600 p-5 space-y-2">
+            <div
+              onClick={handleGoogle}
+              role="button"
+              className="flex items-center gap-2 text-2xl font-bold justify-center py-8"
+            >
+              <FcGoogle /> Continue with Google
+            </div>
             <h3 className="text-2xl font-semibold py-4">Create an Account</h3>
             <div>
               <label className="font-bold">Your Name</label>
@@ -88,7 +102,7 @@ const Register = () => {
             </div>
             <div className="border border-gray-500 rounded-md px-1 text-center font-medium py-3">
               <Link to="/login">
-                <h2>Login your jobTask account</h2>
+                <h2>Login your myTask account</h2>
               </Link>
             </div>
           </div>

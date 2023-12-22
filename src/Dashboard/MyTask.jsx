@@ -5,12 +5,14 @@ import SecureAxios from "../Hooks/SecureAxios";
 import toast, { Toaster } from "react-hot-toast";
 import AllTasks from "./AllTasks";
 import UseTasks from "../Hooks/UseTasks";
+import UseAuth from "../Hooks/UseAuth";
 
 const TaskForm = () => {
   const [startDate, setStartDate] = useState(new Date());
 
   const { register, handleSubmit } = useForm();
   const [, refetch] = UseTasks();
+  const { user } = UseAuth();
 
   const onSubmit = (data) => {
     const taskInfo = {
@@ -18,6 +20,7 @@ const TaskForm = () => {
       priority: data.priority,
       descriptions: data.descriptions,
       startDate,
+      email: user.email
     };
 
     SecureAxios.post("/tasks", taskInfo)

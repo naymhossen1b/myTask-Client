@@ -4,8 +4,13 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 import { ImSpinner9 } from "react-icons/im";
 import { TiTickOutline } from "react-icons/ti";
 import { LuListTodo } from "react-icons/lu";
+import SecureAxios from "../Hooks/SecureAxios";
+import toast from "react-hot-toast";
 
 const TaskItem = ({ task, index, moveTask }) => {
+
+  const [,refetch ] = UseTasks()
+
   const [{ isDragging }, drag] = useDrag({
     type: "TASK",
     item: { index },
@@ -23,6 +28,16 @@ const TaskItem = ({ task, index, moveTask }) => {
       }
     },
   });
+  const handleDelete = (id) => {{
+        SecureAxios.delete(`/tasks/${id}`)
+        .then((res) => {
+          if (res.data.deletedCount > 0) {
+            refetch();
+            toast.success("Delete Success!")
+          }
+        });
+      }
+  };
 
   return (
     <div
@@ -32,7 +47,7 @@ const TaskItem = ({ task, index, moveTask }) => {
     >
       <h4 className="text-xl font-medium">{task?.title}</h4>
       <p className="font-medium">{task?.descriptions}</p>
-      <div>
+      <div className="space-y-2">
         <p className="text-sm">
           <span className="font-medium underline">Deadlines </span>: {task?.startDate}
         </p>
@@ -40,6 +55,12 @@ const TaskItem = ({ task, index, moveTask }) => {
           <span className="underline font-medium text-neutral">Priority </span>
           {task?.priority}
         </p>
+      </div>
+      <div className="flex justify-end">
+        <button
+        className="border rounded-md p-1 bg-red-500 text-white"
+       onClick={() => handleDelete(task?._id)} 
+        >Delete</button>
       </div>
     </div>
   );

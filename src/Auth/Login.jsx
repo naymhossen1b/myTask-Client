@@ -1,5 +1,7 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import UseAuth from "../Hooks/useAuth";
+import { FcGoogle } from "react-icons/fc";
+import toast, { Toaster } from "react-hot-toast";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -7,7 +9,7 @@ const Login = () => {
 
   const from = location.state?.from?.pathname || "/";
 
-  const { loginUser } = UseAuth();
+  const { loginUser, googleLogin } = UseAuth();
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -16,6 +18,7 @@ const Login = () => {
     const password = form.password.value;
     loginUser(email, password)
       .then(() => {
+        toast.success('Login success!')
         navigate(from, { replace: true });
       })
       .catch((err) => {
@@ -23,12 +26,25 @@ const Login = () => {
       });
   };
 
+  const handleGoogle = async () => {
+    await googleLogin()
+    toast.success('Login success!')
+    navigate(from, { replace: true });
+  }
+
   return (
     <div className="px-96">
       <form onSubmit={handleLogin}>
         <div>
-          <h1 className="text-3xl text-center text-black font-bold py-5">jobTask</h1>
+          <h1 className="text-3xl text-center text-black font-bold py-5">myTask</h1>
           <section className="border rounded-md border-gray-600 p-5 space-y-2">
+            <div
+            onClick={handleGoogle}
+              role="button"
+              className="flex items-center gap-2 text-2xl font-bold justify-center py-8"
+            >
+              <FcGoogle /> Continue with Google
+            </div>
             <h3 className="text-2xl font-semibold py-4">Sign in</h3>
             <div>
               <label className="font-bold">Email</label>
@@ -61,16 +77,17 @@ const Login = () => {
           </section>
           <div>
             <div className="divider divider-warning font-medium text-sm text-gray-400">
-              New to UrbanHaven?
+              New to myTask?
             </div>
             <div className="border border-gray-500 rounded-md px-1 text-center font-medium py-3">
               <Link to="/register">
-                <h2>Create your jobTask account</h2>
+                <h2>Create your myTask account</h2>
               </Link>
             </div>
           </div>
         </div>
       </form>
+      <Toaster />
     </div>
   );
 };

@@ -11,6 +11,7 @@ import Feature from "../Pages/Featurs/Feature";
 import Pricing from "../Pages/Pricing/Pricing";
 import Error from "../Components/Error";
 import PrivateRoute from "./PrivateRoute";
+import Today from "../Dashboard/Today";
 
 const router = createBrowserRouter([
   {
@@ -61,6 +62,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <MyTask />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "today",
+        element: (
+          <PrivateRoute>
+            <Today />
           </PrivateRoute>
         ),
       },

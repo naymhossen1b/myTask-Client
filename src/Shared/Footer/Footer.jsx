@@ -8,7 +8,7 @@ const Footer = () => {
     <div>
       <footer className="footer p-10 bg-base-200 text-base-content">
         <aside>
-          <h2 className="text-4xl font-bold text-gray-600">jobTask</h2>
+          <h2 className="text-4xl font-bold text-gray-600">myTask</h2>
           <p>
             Join millions of people who organize <br /> work and life with Todoist.
           </p>
