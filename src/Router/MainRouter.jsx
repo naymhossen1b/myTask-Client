@@ -9,11 +9,14 @@ import DashboardLayout from "../Layout/DashboardLayout";
 import ForTeam from "../Pages/ForTeam/ForTeam";
 import Feature from "../Pages/Featurs/Feature";
 import Pricing from "../Pages/Pricing/Pricing";
+import Error from "../Components/Error";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
+    errorElement: <Error />,
     children: [
       {
         path: "/",
@@ -47,14 +50,22 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/dashboardLayout",
-        element: <Dashboard />,
+        element: (
+          <PrivateRoute>
+            <Dashboard />
+          </PrivateRoute>
+        ),
       },
       {
         path: "myTask",
-        element: <MyTask />
-      }
-    ]
-  }
+        element: (
+          <PrivateRoute>
+            <MyTask />
+          </PrivateRoute>
+        ),
+      },
+    ],
+  },
 ]);
 
 export default router;

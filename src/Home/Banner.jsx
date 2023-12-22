@@ -4,7 +4,7 @@ const Banner = () => {
   return (
     <div className="md:flex flex-grow items-center">
       <div className="md:w-1/2">
-        <img className="" src="/public/3900527.jpg" alt="" />
+        <img className="" src="https://imagizer.imageshack.com/img922/3655/2sc2kF.jpg" alt="" />
       </div>
       <div className="md:w-1/2 space-y-5">
         <h1 className="text-6xl font-bold text-center">
